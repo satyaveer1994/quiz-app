@@ -1,34 +1,25 @@
 ## Node.js Quiz Application
 
-. This is a Node.js application that allows users to create and participate in timed quizzes. The application provides  a RESTful API for creating and retrieving quizzes. The application uses MongoDB for storing quiz data and the API is implemented using the Express.js framework.
+. This is a Node.js application that allows users to create and participate in timed quizzes. The application provides a RESTful API for creating and retrieving quizzes. The application uses MongoDB for storing quiz data and the API is implemented using the Express.js framework.
 
-   ## Installation
+## Installation
 
     Clone the repository: git remote add origin https://github.com/satyaveer1994/quiz-app.git
     Install dependencies: npm install
-    
 
-    
+
+
 
     Start the application: nodemon src/index.js
 
 1. The server will be running at http://localhost:3000
 
-
 ## API Endpoints
 
-
-
-
-     QuizSchema:
-
-
-
-    question: the text of the question
-    options: an array of the answer options for the question
-    rightAnswer: the index of the correct answer in the options array
-    startDate: the date and time when the quiz should start
-    endDate: the date and time when the quiz should end
+    POST /quizzes - Create a new quiz
+    GET /quizzes/active - Get the active quiz
+    GET /quizzes/:id/result - Get the result of a quiz by its ID
+    GET /quizzes/all - Get all quizzes
 # Create a Quiz
 
 Users can create a quiz by sending a POST request to the /quizzes endpoint with the following fields:
@@ -55,7 +46,7 @@ Users can create a quiz by sending a POST request to the /quizzes endpoint with 
     Retrieve the Active Quiz
 
 Users can retrieve the active quiz (the quiz that is currently within its start and end time) by sending a GET request to the /quizzes/active endpoint.
-    
+
     GET /quizzes/active
 
     Example response body:
@@ -70,9 +61,9 @@ Users can retrieve the active quiz (the quiz that is currently within its start 
 
     Retrieve Quiz Result
 
-. After 5 minutes from the end time of a quiz, users can retrieve the result of the quiz by sending a GET request   to the /quizzes/:id/result endpoint, where :id is the ID of the quiz.
+. After 5 minutes from the end time of a quiz, users can retrieve the result of the quiz by sending a GET request to the /quizzes/:id/result endpoint, where :id is the ID of the quiz.
 
-    GET /quizzes/:id/result 
+    GET /quizzes/:id/result
 
 
     Example response body:
@@ -93,10 +84,9 @@ Users can retrieve the active quiz (the quiz that is currently within its start 
 
 . Users can retrieve all quizzes by sending a GET request to the /quizzes/all endpoint.
 
-
     GET /quizzes/all
 
-    
+
      {
      "message": "All quizzes retrieved",
     "quizzes": [
@@ -117,4 +107,3 @@ Users can retrieve the active quiz (the quiz that is currently within its start 
         }
     ]
     }
-

@@ -5,23 +5,12 @@ const router = express.Router();
 
 const quizController = require("../controllers/quizController");
 
+router.post("/quizzes", quizController.createQuiz);
 
+router.get("/quizzes/active", quizController.getQuiz);
 
-router.post("/quizzes",quizController.createQuiz);
+router.get("/quizzes/:id/result", quizController.getQuizResultById);
 
-
-router.get("/quizzes/active",quizController.getQuiz);
-
- router.get("/quizzes/:id/result",quizController.getQuizResultById);
-
-router.get("/quizzes/all",quizController.getAllQuiz);
-
-//router.put("/quizzesUpdate",quizController.updateQuiz);
-
-// router.post("/quizzes",quizController.createQuiz);
-
-
-
-
+router.get("/quizzes/all", quizController.getAllQuiz);
 
 module.exports = router;
