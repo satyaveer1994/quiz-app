@@ -13,6 +13,7 @@
     Start the application: nodemon src/index.js
 
 1. The server will be running at http://localhost:3000
+2. A link to the hosted API: https://quiz-app-qgaw.onrender.com
 
 ## API Endpoints
 
