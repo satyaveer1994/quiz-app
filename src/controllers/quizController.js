@@ -23,10 +23,7 @@ const createQuiz = async (req, res) => {
     const startMoment = moment(startDate);
     console.log(startMoment);
     const endMoment = moment(endDate);
-    if (
-      !startMoment.isValid() ||
-      !endMoment.isValid() ||
-      endMoment.isBefore(startMoment)
+    if (  !startMoment.isValid() ||!endMoment.isValid() ||endMoment.isBefore(startMoment)
     ) {
       return res.status(400).send({
         message:
@@ -98,7 +95,7 @@ const getQuizResultById = async (req, res) => {
 const getAllQuiz = async (req, res) => {
   try {
     // Find all quizzes and return them
-    const quizzes = await quizModel.find();
+    const quizzes = await quizModel.find().select({__v: 0});
     return res.status(200).send({ message: "All quizzes retrieved", quizzes });
   } catch (error) {
     console.error(error);
@@ -108,16 +105,26 @@ const getAllQuiz = async (req, res) => {
 
 // // Define a cron job that updates the status of quizzes every minute
 
-// * * * * * *
-//  | | | | | |
-//  | | | | | day of the week
-//  | | | | month
-//  | | | day of the month
-//  | | hour
-//  | minute
-//  second (optional)
+// Allowed fields
+// # ┌────────────── second (optional)
+// # │ ┌──────────── minute
+// # │ │ ┌────────── hour
+// # │ │ │ ┌──────── day of month
+// # │ │ │ │ ┌────── month
+// # │ │ │ │ │ ┌──── day of week
+// # │ │ │ │ │ │
+// # │ │ │ │ │ │
+// # * * * * * *
+// Allowed values
+// field	value
+// second	0-59
+// minute	0-59
+// hour	0-23
+// day of month	1-31
+// month	1-12 (or names)
+// day of week	0-7 (or names, 0 or 7 are sunday)
 
-cron.schedule("* */10 * * *", async () => {
+ const quiz=cron.schedule("*/5 * * * *", async () => {
   try {
     // Find all quizzes and update their status based on the current time
     const now = moment();
@@ -125,6 +132,7 @@ cron.schedule("* */10 * * *", async () => {
       { endDate: { $lt: now.toDate() }, status: { $ne: "finished" } },
       { status: "finished" }
     );
+    
     await quizModel.updateMany(
       {
         startDate: { $lte: now.toDate() },
@@ -142,5 +150,5 @@ cron.schedule("* */10 * * *", async () => {
     console.error(error);
   }
 });
-
+quiz.start()
 module.exports = { createQuiz, getQuiz, getQuizResultById, getAllQuiz };

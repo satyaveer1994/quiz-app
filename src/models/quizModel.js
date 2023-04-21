@@ -25,7 +25,7 @@ const quizSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: ["inactive", "active", "finished"],
-    default: "active",
+    default: "inactive",
   },
 });
 

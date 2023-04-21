@@ -1,6 +1,6 @@
 ## Node.js Quiz Application
 
-. This is a Node.js application that allows users to create and participate in timed quizzes. The application provides a RESTful API for creating and retrieving quizzes. The application uses MongoDB for storing quiz data and the API is implemented using the Express.js framework.
+- This is a Node.js application that allows users to create and participate in timed quizzes. The application provides a RESTful API for creating and retrieving quizzes. The application uses MongoDB for storing quiz data and the API is implemented using the Express.js framework.
 
 ## Installation
 
@@ -34,7 +34,7 @@ Users can create a quiz by sending a POST request to the /quizzes endpoint with 
 
     POST /quizzes
 
-    Example request body:
+Example request body:
 
     {
      "question": "What is the capital of France?",
@@ -44,13 +44,14 @@ Users can create a quiz by sending a POST request to the /quizzes endpoint with 
      "endDate": "2023-04-20T09:00:00.000Z"
     }
 
-    Retrieve the Active Quiz
+Retrieve the Active Quiz
 
 Users can retrieve the active quiz (the quiz that is currently within its start and end time) by sending a GET request to the /quizzes/active endpoint.
 
     GET /quizzes/active
 
-    Example response body:
+    
+Example response body:
 
     {
     "message": "Active quiz found",
@@ -60,14 +61,14 @@ Users can retrieve the active quiz (the quiz that is currently within its start 
     }
     }
 
-    Retrieve Quiz Result
+- Retrieve Quiz Result
 
 . After 5 minutes from the end time of a quiz, users can retrieve the result of the quiz by sending a GET request to the /quizzes/:id/result endpoint, where :id is the ID of the quiz.
 
     GET /quizzes/:id/result
 
 
-    Example response body:
+Example response body:
 
 
     {
@@ -81,7 +82,7 @@ Users can retrieve the active quiz (the quiz that is currently within its start 
     }
 
 
-    Retrieve All Quizzes
+- Retrieve All Quizzes
 
 . Users can retrieve all quizzes by sending a GET request to the /quizzes/all endpoint.
 
